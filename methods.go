@@ -1,6 +1,7 @@
 package mongo_monkey
 
 import (
+	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -59,4 +60,14 @@ func UpdateObj(id primitive.ObjectID, obj interface{}, update bson.D) error {
 // DeleteObj - Данная функция повторяет метод DeleteObj из структуры Wrap
 func DeleteObj(id primitive.ObjectID, obj interface{}) error {
 	return defaultWrap.DeleteObj(id, obj)
+}
+
+// Connect - Данная функция повторяет метод Connect из структуры Wrap
+func Connect(ctx context.Context) error {
+	return defaultWrap.Connect(ctx)
+}
+
+// Disconnect - Данная функция повторяет метод Disconnect из структуры Wrap
+func Disconnect(ctx context.Context) error {
+	return defaultWrap.Disconnect(ctx)
 }
