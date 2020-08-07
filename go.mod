@@ -1,4 +1,4 @@
-module mongo-monkey
+module github.com/ReanSn0w/mongo-monkey
 
 go 1.14
 
