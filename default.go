@@ -5,7 +5,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
-	"mongo-monkey/wrap"
+	"github.com/ReanSn0w/mongo-monkey/wrap"
 	"os"
 )
 
