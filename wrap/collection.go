@@ -57,3 +57,10 @@ func (w *Wrap) DeleteSet(set interface{}, filter bson.D) error {
 	_, err := c.DeleteMany(context.TODO(), filter)
 	return err
 }
+
+// CountElements - рассчет колличества элементов в коллекции, удовлетворяющих фильтру
+func (w *Wrap) CountElements(set interface{}, filter bson.D) (int, error) {
+	c := w.Collection(set)
+	count, err := c.CountDocuments(context.TODO(), filter)
+	return int(count), err
+}

@@ -36,6 +36,10 @@ func UpdateSet(set interface{}, filter bson.D, update bson.D) error {
 func DeleteSet(set interface{}, filter bson.D) error {
 	return defaultWrap.DeleteSet(set, filter)
 }
+
+// CountElements - Данная функция повторяет метод CountElements из структуры Wrap
+func CountElements(set interface{}, filter bson.D) (int, error) {
+	return defaultWrap.CountElements(set, filter)
 }
 
 // GetObj - Данная функция повторяет метод GetObj из структуры Wrap
