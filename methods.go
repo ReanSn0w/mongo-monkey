@@ -34,7 +34,8 @@ func UpdateSet(set interface{}, filter bson.D, update bson.D) error {
 
 // DeleteSet - Данная функция повторяет метод DeleteSet из структуры Wrap
 func DeleteSet(set interface{}, filter bson.D) error {
-	return DeleteSet(set, filter)
+	return defaultWrap.DeleteSet(set, filter)
+}
 }
 
 // GetObj - Данная функция повторяет метод GetObj из структуры Wrap
