@@ -12,7 +12,7 @@ import (
 var defaultWrap wrap.Wrap
 
 func init() {
-	uri := os.ExpandEnv("MongoURI")
+	uri := os.Getenv("MongoURI")
 	if uri != "" {
 		err := setupDefaultWrap(uri)
 
