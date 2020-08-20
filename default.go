@@ -14,19 +14,25 @@ var defaultWrap wrap.Wrap
 func init() {
 	uri := os.Getenv("MongoURI")
 	if uri != "" {
+		log.Printf("MongoURI: %v\n", uri)
 		err := setupDefaultWrap(uri)
 
 		if err == nil {
 			return
 		}
+
+		log.Println(err)
 	}
 
 	if ptr := flag.String("mongoURI", "mongo://localhost:27017/", "mongoURI String"); ptr != nil {
+		log.Printf("mongoURL: %v\n", *ptr)
 		err := setupDefaultWrap(*ptr)
 
 		if err == nil {
 			return
 		}
+
+		log.Println(err)
 	}
 
 	err := setupDefaultWrap("mongo://localhost:27017/")
