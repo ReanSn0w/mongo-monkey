@@ -14,7 +14,8 @@ func idFilter(id primitive.ObjectID) bson.D {
 // GetObj - функция для получения объекта из mongo.
 func (w *Wrap) GetObj(id primitive.ObjectID, obj interface{}) error {
 	c := w.Collection(obj)
-	return c.FindOne(context.TODO(), idFilter(id)).Err()
+	res := c.FindOne(context.TODO(), idFilter(id))
+	return res.Decode(obj)
 }
 
 // CreateObj - функция создания нового объекта в mongo.
