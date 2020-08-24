@@ -62,3 +62,8 @@ func setupDefaultWrap(uri string) error {
 func uriToClient(uri string) (*mongo.Client, error) {
 	return mongo.NewClient(options.Client().ApplyURI(uri))
 }
+
+// ChangeDB - повторяет метод ChangeDB из пакета Wrap
+func ChangeDB(db string) {
+	defaultWrap.ChangeDB(db)
+}
