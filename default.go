@@ -1,6 +1,7 @@
 package mongo_monkey
 
 import (
+	"errors"
 	"flag"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -12,16 +13,24 @@ import (
 var defaultWrap wrap.Wrap
 
 func init() {
+	if err := setupMongoURI(); err == nil {
+		setupDatabase()
+		return
+	}else{
+		log.Println(err)
+	}
+}
+
+func setupMongoURI() error {
 	uri := os.Getenv("MongoURI")
+
 	if uri != "" {
 		log.Printf("MongoURI: %v\n", uri)
 		err := setupDefaultWrap(uri)
 
 		if err == nil {
-			return
+			return nil
 		}
-
-		log.Println(err)
 	}
 
 	if ptr := flag.String("mongoURI", "mongo://localhost:27017/", "mongoURI String"); ptr != nil {
@@ -29,16 +38,17 @@ func init() {
 		err := setupDefaultWrap(*ptr)
 
 		if err == nil {
-			return
+			return nil
 		}
-
-		log.Println(err)
 	}
 
-	err := setupDefaultWrap("mongo://localhost:27017/")
+	return errors.New("Не удалось инициализировать mongo-monkey в автоматическом режиме.")
+}
 
-	if err != nil {
-		log.Println("Не удалось инициализировать mongo-monkey в автоматическом режиме.")
+func setupDatabase() {
+	database := os.Getenv("Database")
+	if database != "" {
+		defaultWrap.ChangeDB(database)
 	}
 }
 
