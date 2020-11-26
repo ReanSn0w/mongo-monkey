@@ -77,3 +77,8 @@ func uriToClient(uri string) (*mongo.Client, error) {
 func ChangeDB(db string) {
 	defaultWrap.ChangeDB(db)
 }
+
+// GetDefaultWrap - метод для получения стандартной обертки для переиспользования
+func GetDefaultWrap() wrap.Wrap {
+	return defaultWrap
+}
