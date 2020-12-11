@@ -3,11 +3,12 @@ package mongo_monkey
 import (
 	"errors"
 	"flag"
+	"log"
+	"os"
+
+	"github.com/ReanSn0w/mongo-monkey/wrap"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"log"
-	"github.com/ReanSn0w/mongo-monkey/wrap"
-	"os"
 )
 
 var defaultWrap wrap.Wrap
@@ -16,7 +17,7 @@ func init() {
 	if err := setupMongoURI(); err == nil {
 		setupDatabase()
 		return
-	}else{
+	} else {
 		log.Println(err)
 	}
 }
@@ -81,4 +82,9 @@ func ChangeDB(db string) {
 // GetDefaultWrap - метод для получения стандартной обертки для переиспользования
 func GetDefaultWrap() wrap.Wrap {
 	return defaultWrap
+}
+
+// Fork - создает копию wrap для работы с БД
+func Fork() wrap.Wrap {
+	return defaultWrap.Fork()
 }
